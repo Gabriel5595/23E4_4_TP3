@@ -1,10 +1,13 @@
 ﻿using System.ComponentModel.DataAnnotations;
+using System.ComponentModel.DataAnnotations.Schema;
 
 namespace PokeStore.Model;
 
+[Table("TB_PRODUCT")]
 public class Product
 {
     //PROPRIEDADES E ATRIBUTOS
+    [Column("Id")]
     public int ProductId {  get; set; }
 
     [Display(Name = "Nome")]
@@ -37,6 +40,9 @@ public class Product
     [DataType("month")]
     [DisplayFormat(DataFormatString = "{0:MMMM \\de yyyy}")]
     public DateTime RegistrationDate { get; set; }
+
+    [Display(Name = "Marca")]
+    public int? BrandId { get; set; }
 
     //CONTRUTOR
     //MÉTODOS

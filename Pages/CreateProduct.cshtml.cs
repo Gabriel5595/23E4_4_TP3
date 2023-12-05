@@ -1,5 +1,6 @@
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.AspNetCore.Mvc.RazorPages;
+using Microsoft.AspNetCore.Mvc.Rendering;
 using PokeStore.Model;
 using PokeStore.Service;
 
@@ -12,6 +13,8 @@ public class CreateProductModel : PageModel
 
     [BindProperty]
     public Product Product { get; set; }
+
+    public SelectList BrandOptionItems {  get; set; }
     
     //CONSTRUTOR
     public CreateProductModel(IProductService productService)
@@ -20,6 +23,13 @@ public class CreateProductModel : PageModel
     }
 
     //MÉTODOS
+    public void OnGet()
+    {
+        BrandOptionItems = new SelectList(_service.FindAllBrands(),
+            nameof(Brand.BrandId),
+            nameof(Brand.BrandDescription));
+    }
+
     public IActionResult OnPost()
     {
         if (!ModelState.IsValid)

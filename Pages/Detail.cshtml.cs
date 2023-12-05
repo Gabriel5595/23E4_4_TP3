@@ -10,6 +10,7 @@ namespace PokeStore.Pages
         //PROPRIEDADES E ATRIBUTOS
         private IProductService _service;
         public Product Product { get; private set; }
+        public Brand Brand { get; private set; }
 
         //CONSTRUTOR
         public DetailModel(IProductService productService)
@@ -21,6 +22,7 @@ namespace PokeStore.Pages
         public IActionResult OnGet(int id)
         {
             Product = _service.FindProduct(id);
+            Brand = _service.FindAllBrands().SingleOrDefault(item  => item.BrandId == Product.BrandId);
 
             if (Product == null)
             {

@@ -1,6 +1,6 @@
 ﻿using PokeStore.Model;
 
-namespace PokeStore.Service;
+namespace PokeStore.Service.Memory;
 
 public class ProductService : IProductService
 {
@@ -80,5 +80,10 @@ public class ProductService : IProductService
     {
         var productFound = FindProduct(id);
         _products.Remove(productFound);
+    }
+
+    public IList<Brand> FindAllBrands()
+    {
+        throw new NotImplementedException();
     }
 }

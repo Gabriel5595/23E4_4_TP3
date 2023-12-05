@@ -1,7 +1,9 @@
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.AspNetCore.Mvc.RazorPages;
+using Microsoft.AspNetCore.Mvc.Rendering;
 using PokeStore.Model;
 using PokeStore.Service;
+using System.Text.RegularExpressions;
 
 namespace PokeStore.Pages;
 
@@ -11,6 +13,7 @@ public class EditProductModel : PageModel
     private IProductService _service;
     [BindProperty]
     public Product Product { get; set; }
+    public SelectList BrandOptionItems { get; set; }
 
     //CONSTRUTOR
     public EditProductModel(IProductService productService)
@@ -22,6 +25,9 @@ public class EditProductModel : PageModel
     public void OnGet(int id)
     {
         Product = _service.FindProduct(id);
+        BrandOptionItems = new SelectList(_service.FindAllBrands(),
+        nameof(Brand.BrandId),
+        nameof(Brand.BrandDescription));
     }
 
     public IActionResult OnPost()
@@ -31,7 +37,7 @@ public class EditProductModel : PageModel
         {
             return Page();
         }
-        Console.WriteLine(Product.toString());
+
         _service.EditProduct(Product);
 
         return RedirectToPage("/List");
