@@ -1,7 +1,7 @@
 using Microsoft.EntityFrameworkCore;
 using PokeStore.Data;
 using PokeStore.Service;
-using PokeStore.Service.Memory;
+using PokeStore.Service.Data;
 
 var builder = WebApplication.CreateBuilder(args);
 
